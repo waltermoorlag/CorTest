@@ -1,0 +1,15 @@
+{
+  "name": "cortest",
+  "version": "1.0.0",
+  "description": "Test para COR",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js",
+    "start": "node index.js"
+  },
+  "author": "Moorlag Walter",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "0.0.1-security"
+  }
+}
