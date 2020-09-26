@@ -20,8 +20,8 @@ function escribirTxt(arr) {
     return new Promise(function (resolve, reject) {
         let nameFile = __dirname + '/Result.txt'
         let texto = "";
-        for(let i = 0; i < arr.length; i++){
-            texto += `Resultado Nro: ${i+1}\n`;
+        for (let i = 0; i < arr.length; i++) {
+            texto += `Resultado Nro: ${i + 1}\n`;
             texto += arr[i].join("\n");
             texto += '\n\n';
         }
@@ -31,21 +31,22 @@ function escribirTxt(arr) {
     });
 }
 
-const permutator = (inputArr,max_result) => {
+const permutator = (inputArr, max_result) => {
     let result = [];
-    const permute = (arr, m = []) => {
+    const limit = eval(max_result);
+    const permute = function (arr, m = []) {
         if (arr.length === 0) {
-            if(m.esCirculo()){
+            if (m.esCirculo()) {
                 result.push(m);
             }
         } else {
             for (let i = 0; i < arr.length; i++) {
-                if(result.length === max_result){
-                    break;
-                }
                 let curr = arr.slice();
                 let next = curr.splice(i, 1);
-                permute(curr, m.concat(next))
+                permute(curr, m.concat(next));
+                if (result.length === limit) {
+                    break;
+                }
             }
         }
     }
@@ -53,9 +54,9 @@ const permutator = (inputArr,max_result) => {
     return result.length > 0 ? result : false;
 }
 
-async function procesarArreglo(arreglo,max_result) {
+async function procesarArreglo(arreglo, max_result) {
     return new Promise(function (resolve, reject) {
-        let data = permutator(arreglo,max_result);
+        let data = permutator(arreglo, max_result);
         if (!data) {
             resolve("No se pude generar Circulo");
         } else {
@@ -66,8 +67,6 @@ async function procesarArreglo(arreglo,max_result) {
     });
 }
 
-
-let arregloProceo = process.env.input_array || ['chair', 'racket', 'touch', 'tunic', 'height'];
-// let max_result = process.env.max_result || 1;
-// console.log(max_result);
-procesarArreglo(arregloProceo,1).then(data => console.log(data));
+let arregloProceo = eval(process.env.input_array) || ['chair', 'racket', 'touch', 'tunic', 'height'];
+let max_result = process.env.max_result || 1;
+procesarArreglo(arregloProceo, max_result).then(data => console.log(data));
