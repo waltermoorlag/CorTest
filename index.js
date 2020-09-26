@@ -31,7 +31,7 @@ function escribirTxt(arr) {
     });
 }
 
-const permutator = (inputArr) => {
+const permutator = (inputArr,max_result) => {
     let result = [];
     const permute = (arr, m = []) => {
         if (arr.length === 0) {
@@ -40,6 +40,9 @@ const permutator = (inputArr) => {
             }
         } else {
             for (let i = 0; i < arr.length; i++) {
+                if(result.length === max_result){
+                    break;
+                }
                 let curr = arr.slice();
                 let next = curr.splice(i, 1);
                 permute(curr, m.concat(next))
@@ -50,9 +53,9 @@ const permutator = (inputArr) => {
     return result.length > 0 ? result : false;
 }
 
-async function procesarArreglo(arreglo) {
+async function procesarArreglo(arreglo,max_result) {
     return new Promise(function (resolve, reject) {
-        let data = permutator(arreglo);
+        let data = permutator(arreglo,max_result);
         if (!data) {
             resolve("No se pude generar Circulo");
         } else {
@@ -64,5 +67,7 @@ async function procesarArreglo(arreglo) {
 }
 
 
-var arregloProceo = ['chair', 'racket', 'touch', 'tunic', 'height'];
-procesarArreglo(arregloProceo).then(data => console.log(data));
+let arregloProceo = process.env.input_array || ['chair', 'racket', 'touch', 'tunic', 'height'];
+// let max_result = process.env.max_result || 1;
+// console.log(max_result);
+procesarArreglo(arregloProceo,1).then(data => console.log(data));
