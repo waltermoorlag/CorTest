@@ -15,8 +15,10 @@ npm start
 ## Ejecutando las pruebas ⚙️
 
 _El programa utiliza 2 variables de entorno para pasar parametros._
+
 _input_array: el arreglo que se va a poner en prueba. Por defecto es_ ['chair', 'racket', 'touch', 'tunic', 'height']
-_max_result: el limite de combinaciones de circulos posibles. por defecto es_ 1
+
+_max_result: el limite de combinaciones de circulos posibles. Por defecto es_ 1
 
 Ejemplo de ejecucion:
 ```
